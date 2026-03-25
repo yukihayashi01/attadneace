@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Attendance Checker — Track your college attendance, manage timetables, and ensure 75% criteria compliance.">
+  <title>📋 Attendance Checker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ═══ Header ═══ -->
+  <header id="app-header">
+    <h1 id="app-title">📋 Attendance Checker</h1>
+    <div id="profile-area">
+      <span id="profile-icon">👤</span>
+      <select id="profile-select"></select>
+      <button id="btn-add-profile" class="btn btn-green btn-sm" title="New Profile">+ New</button>
+      <button id="btn-delete-profile" class="btn btn-red btn-sm" title="Delete Profile">🗑</button>
+    </div>
+  </header>
+
+  <!-- ═══ Tabs ═══ -->
+  <nav id="tab-bar">
+    <button class="tab-btn active" data-tab="setup">⚙ Setup</button>
+    <button class="tab-btn" data-tab="attendance">✅ Attendance</button>
+    <button class="tab-btn" data-tab="dashboard">📊 Dashboard</button>
+  </nav>
+
+  <!-- ═══ TAB CONTENT ═══ -->
+  <main id="tab-content">
+
+    <!-- ═══ TAB 1: Setup ═══ -->
+    <section id="tab-setup" class="tab-panel active">
+      <!-- Subjects Card -->
+      <div class="card">
+        <h2 class="card-title">📚 Subjects</h2>
+        <div class="input-row">
+          <input type="text" id="subject-input" placeholder="Enter subject name..." />
+          <button id="btn-add-subject" class="btn btn-accent">+ Add</button>
+        </div>
+        <ul id="subject-list" class="item-list"></ul>
+        <button id="btn-remove-subject" class="btn btn-red btn-sm" style="margin-top:8px; align-self:flex-end;">🗑 Remove Selected</button>
+      </div>
+
+      <!-- Semester End Card -->
+      <div class="card">
+        <h2 class="card-title">📅 Semester End Date</h2>
+        <div class="date-row">
+          <label>Day: <input type="number" id="sem-day" min="1" max="31" value="1" class="num-input"></label>
+          <label>Month: <input type="number" id="sem-month" min="1" max="12" value="1" class="num-input"></label>
+          <label>Year: <input type="number" id="sem-year" min="2024" max="2030" class="num-input"></label>
+        </div>
+      </div>
+
+      <!-- Timetable Card -->
+      <div class="card">
+        <h2 class="card-title">🗓️ Weekly Timetable</h2>
+        <p class="subtitle">Build your schedule period by period. Select a subject and click "Add Period" for each slot.</p>
+        <div id="timetable-builder"></div>
+      </div>
+
+      <button id="btn-save-setup" class="btn btn-accent btn-lg">💾 Save Setup</button>
+    </section>
+
+    <!-- ═══ TAB 2: Attendance ═══ -->
+    <section id="tab-attendance" class="tab-panel">
+      <!-- Today's Classes Card -->
+      <div class="card">
+        <h2 class="card-title" id="today-title">📆 Today's Classes</h2>
+        <div id="today-classes"></div>
+        <div id="today-actions" class="today-actions" style="display:none;">
+          <button id="btn-log-today" class="btn btn-accent">📝 Log Attendance</button>
+        </div>
+      </div>
+
+      <!-- Add Rescheduled Class -->
+      <div class="card">
+        <h2 class="card-title">🔄 Add Rescheduled / Extra Class</h2>
+        <p class="subtitle">Teacher took an extra class not on the timetable? Add it here.</p>
+        <div class="manual-row">
+          <label>Subject: <select id="reschedule-subject"></select></label>
+          <button id="btn-add-reschedule" class="btn btn-accent btn-sm">+ Add to Today</button>
+        </div>
+      </div>
+
+      <!-- Manual Entry Card -->
+      <div class="card">
+        <h2 class="card-title">✏️ Manual Entry</h2>
+        <p class="subtitle">Directly set attended / total for a subject:</p>
+        <div class="manual-row">
+          <label>Subject: <select id="manual-subject"></select></label>
+        </div>
+        <div class="manual-row">
+          <label>Attended: <input type="number" id="manual-attended" min="0" value="0" class="num-input"></label>
+          <label>Total: <input type="number" id="manual-total" min="0" value="0" class="num-input"></label>
+        </div>
+        <button id="btn-manual-update" class="btn btn-green" style="align-self:flex-end;">💾 Update Attendance</button>
+      </div>
+
+      <!-- Quick Overview Card -->
+      <div class="card">
+        <h2 class="card-title">⚡ Quick Overview</h2>
+        <div id="quick-overview"></div>
+      </div>
+    </section>
+
+    <!-- ═══ TAB 3: Dashboard ═══ -->
+    <section id="tab-dashboard" class="tab-panel">
+      <div id="stats-row" class="stats-row"></div>
+      <div class="card">
+        <h2 class="card-title">📋 Subject-wise Breakdown</h2>
+        <div class="table-wrap">
+          <table id="breakdown-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Attended</th>
+                <th>Total</th>
+                <th>Attendance %</th>
+                <th>Can Skip</th>
+                <th>Must Attend</th>
+                <th>Rem. Classes</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="card-title">💡 Insights</h2>
+        <div id="insights-content"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer id="app-footer">Made by Aditya</footer>
+
+  <!-- ═══ Modal for New Profile ═══ -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3>New Profile</h3>
+      <input type="text" id="modal-profile-name" placeholder="Enter student name..." />
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn btn-sm btn-muted">Cancel</button>
+        <button id="modal-create" class="btn btn-accent btn-sm">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Toast ═══ -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

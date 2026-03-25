@@ -86,7 +86,7 @@ class AttendanceApp(tk.Tk):
         super().__init__()
 
         self.title("Attendance Checker")
-        self.state("zoomed")
+        self.state("normal")
         self.minsize(800, 600)
         self.configure(bg=BG_DARK)
 
@@ -234,8 +234,6 @@ class AttendanceApp(tk.Tk):
         self._build_setup_tab()
         self._build_attendance_tab()
         self._build_dashboard_tab()
-
-        # Refresh dashboard when tab changes
         self.notebook.bind("<<NotebookTabChanged>>", lambda e: self._refresh_dashboard())
 
     # ── Profile Management ─────────────────────────────────────────
