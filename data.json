@@ -1,0 +1,78 @@
+{
+  "subjects": [
+    "AEM",
+    "PHYSICS",
+    "PYTHON",
+    "EVS",
+    "DSA",
+    "AIML",
+    "DE"
+  ],
+  "timetable": {
+    "Monday": {
+      "AEM": 1,
+      "PHYSICS": 1,
+      "PYTHON": 2,
+      "AIML": 2
+    },
+    "Tuesday": {
+      "PHYSICS": 1,
+      "EVS": 1,
+      "DSA": 2,
+      "DE": 1
+    },
+    "Wednesday": {
+      "AEM": 1,
+      "PHYSICS": 1,
+      "PYTHON": 1,
+      "DSA": 1,
+      "AIML": 1
+    },
+    "Thursday": {
+      "AEM": 1,
+      "PHYSICS": 2,
+      "PYTHON": 1,
+      "DSA": 2,
+      "AIML": 1,
+      "DE": 1
+    },
+    "Friday": {
+      "AEM": 1,
+      "PHYSICS": 2,
+      "DSA": 2,
+      "DE": 3
+    },
+    "Saturday": {}
+  },
+  "semester_end": "2026-05-05",
+  "attendance": {
+    "AEM": {
+      "attended": 24,
+      "total": 32
+    },
+    "PHYSICS": {
+      "attended": 30,
+      "total": 42
+    },
+    "PYTHON": {
+      "attended": 23,
+      "total": 30
+    },
+    "EVS": {
+      "attended": 4,
+      "total": 7
+    },
+    "DSA": {
+      "attended": 28,
+      "total": 41
+    },
+    "AIML": {
+      "attended": 15,
+      "total": 22
+    },
+    "DE": {
+      "attended": 20,
+      "total": 27
+    }
+  }
+}
